@@ -5,12 +5,10 @@ from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 import string
 
-# Download necessary NLTK resources
 nltk.download('punkt')
 nltk.download('stopwords')
 
 def preprocess(text, stemming=False):
-    """Preprocesses text by converting to lowercase, removing punctuation, and stopwords."""
     text = text.lower()
     text = text.translate(str.maketrans('', '', string.punctuation))
     words = nltk.word_tokenize(text)
@@ -35,12 +33,11 @@ def document_similarity(doc1, doc2, stemming=False):
     vec2 = tfidf_matrix[1].toarray().flatten()
     
     if not vec1.any() or not vec2.any():
-        return 0.0  # If either vector is empty, similarity is 0
+        return 0.0  
     
     cosine_sim = 1 - cosine(vec1, vec2)
     return cosine_sim
 
-# Sample documents
 doc1 = "Virat playing cricket"
 doc2 = "Subhash started playing cricket by seeing Virat's centuries"
 
